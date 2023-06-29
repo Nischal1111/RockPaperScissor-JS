@@ -1,4 +1,3 @@
-
 const play = document.getElementById('status-head');
 const rock = document.getElementById('rock-button');
 const paper = document.getElementById('paper-button');
@@ -6,6 +5,10 @@ const scissors = document.getElementById('scissors-button');
 const displayMessage = document.querySelector('.move-display');
 
 const moveList = ['Rock', 'Paper', 'Scissors'];
+
+let winMsg = "You won";
+let loseMsg = "You lost";
+let draw = "Draw!!";
 
 rock.addEventListener("click", () => startGame(moveList[0]));
 paper.addEventListener("click", () => startGame(moveList[1]));
@@ -22,7 +25,7 @@ function startGame(playerChoice) {
   const result = calResult(playerChoice, computerChoice);
   play.textContent = result;
 
-  if (result === "You Win" || result === "You Lose" || result === "Draw") {
+  if (result === winMsg || result === loseMsg || result === draw) {
     rock.style.display = "none";
     scissors.style.display = "none";
     paper.textContent = "Play Once More";
@@ -33,13 +36,15 @@ function startGame(playerChoice) {
 
 function calResult(move1, move2) {
   if (move1 === move2) {
-    return "Draw";
-  } else if ((move1 === moveList[0] && move2 === moveList[2]) ||
+    return draw;
+  } else if (
+    (move1 === moveList[0] && move2 === moveList[2]) ||
     (move1 === moveList[1] && move2 === moveList[0]) ||
-    (move1 === moveList[2] && move2 === moveList[1])) {
-    return "You Win";
+    (move1 === moveList[2] && move2 === moveList[1])
+  ) {
+    return winMsg;
   } else {
-    return "You Lose";
+    return loseMsg;
   }
 }
 
